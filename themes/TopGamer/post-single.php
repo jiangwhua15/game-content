@@ -109,11 +109,24 @@
         ?> 
         <div class="important">
 			<span class="important-title"><img style="border: none;">4story Minimum System Requirements:</span><br>
-			<strong>OS:</strong> Windows 7/Vista/XP<br>
-			<strong>Processor:</strong> Pentium4 1.6GHz or better<br>
-			<strong>Memory Ram:</strong> 512MB Free<br>
-			<strong>Hard Disk Space:</strong> At least 2GB of free Space<br>
-			<strong>Video Card:</strong> Geforce FX5700 128MB
+			<?php
+				$System = get_post_meta($post->ID,"TopGamer_system",true);
+				preg_match("/OS:(.*)@/Ui", $System,$matchs);
+				$_os = $matchs[1];
+				preg_match("/Processor:(.*)@/Ui", $System,$matchs);
+				$_processor = $matchs[1];
+				preg_match("/Ram:(.*)@/Ui", $System,$matchs);
+				$_ram = $matchs[1];
+				preg_match("/Space:(.*)@/Ui", $System,$matchs);
+				$_space = $matchs[1];
+				preg_match("/Card:(.*)/i", $System,$matchs);
+				$_card = $matchs[1];
+			?>
+			<strong>OS:</strong> <?php echo $_os;?><br>
+			<strong>Processor:</strong> <?php echo $_processor;?><br>
+			<strong>Memory Ram:</strong> <?php echo $_ram;?><br>
+			<strong>Hard Disk Space:</strong> <?php echo $_space;?><br>
+			<strong>Video Card:</strong> <?php echo $_card;?>
 		</div>
     </div><!-- Post ID <?php the_ID(); ?> -->
     
