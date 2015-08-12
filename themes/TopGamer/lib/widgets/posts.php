@@ -73,16 +73,6 @@ class ThematerPosts extends WP_Widget
                         <?php if ($theme->options['general']['featured_image'] && $instance['display_featured_image'] && has_post_thumbnail() ) { ?><a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(array($instance['featured_image_width'],$instance['featured_image_height']), array("class" => "posts-widget-featured-image " . $instance['featured_image_align'])); ?></a> <?php } ?>
                         <?php if ( $instance['display_title'] ) { ?> <h3 class="posts-widgettitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3><?php } ?>
                         <?php
-                            if($instance['display_date'] || $instance['display_author']) {
-                                ?><div class="posts-widget-meta"><?php 
-                                    if($instance['display_date'] ) {
-                                        the_time($theme->get_option('dateformat'));
-                                    }
-                                    if($instance['display_author']) {
-                                       echo ' '; _e('By', 'themater'); echo ' '; the_author();
-                                    } ?>
-                                </div><?php 
-                            }
                             if($instance['display_content'] || $instance['display_read_more']) {
                                 ?><div class="posts-widget-entry"><?php 
                                     if($instance['display_content'] ) {

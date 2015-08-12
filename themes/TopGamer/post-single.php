@@ -27,6 +27,17 @@
 		ul.list_check li{
 			margin-bottom:10px;
 		}
+		#play_now{
+			display:block;
+			padding: 10px;
+			background: #f43302 none repeat scroll 0 0;
+			width: 100%;
+			height:20px;
+			color:#fff;
+			font-weight: 700;
+			line-height: 20px;
+			text-align: center;
+		}	
 	</style>
 	
     <div <?php post_class('post post-single clearfix'); ?> id="post-<?php the_ID(); ?>">
@@ -40,6 +51,7 @@
                     );
                 } 
             ?>
+        <a id="play_now" href="<?php echo get_post_meta($post->ID,'TopGame_url',true);?>" target="_blank">PLAY NOW</a>
 		<div class="row clearfix">
 			<div class="col col_1_2  alpha">
 				<div class="inner">
@@ -57,7 +69,7 @@
 									preg_match('/Status:(.*)\|/Ui',$info,$matchs);
 									$gameStatus = empty($matchs[1]) ? '--' : $matchs[1];
 									preg_match('/Graphics:(.*)\|/Ui',$info,$matchs);
-									$gameGraphics = empty($matchs[1]) ? '--' : $matchs[1];
+									$gameGrapics = empty($matchs[1]) ? '--' : $matchs[1];
 									preg_match('/Genre:(.*)\|/Ui',$info,$matchs);
 									$gameGenre = empty($matchs[1]) ? '--' : $matchs[1];
 									preg_match('/Developer:(.*)\|/Ui',$info,$matchs);
@@ -66,9 +78,12 @@
 									$gamePublisher = empty($matchs[1]) ? '--' : $matchs[1];
 								}		
 								the_about_game($post->ID);
+
+
 						?>
 						<strong>Title:</strong><?php echo $gameTitle; ?><br>
-						<strong>Status:</strong> <?php echo $gameStatus; ?> <strong>Graphics:</strong> <?php echo $gameGraphics; ?><br>
+						<strong>Status:</strong> <?php echo $gameStatus; ?>  <br>
+						<strong>Graphics:</strong> <?php echo $gameGrapics; ?><br>
 						<strong>Genre:</strong> <a title="<?php echo $gameGenre; ?>" href="" hidefocus="true" style="outline: none;"><?php echo $gameGenre; ?></a><br>
 						<strong>Developer:</strong> <?php echo $gameDeveloper; ?><br>
 						<strong>Publisher:</strong> <?php echo $gamePublisher; ?>
@@ -107,27 +122,32 @@
                 ?><div class="postmeta-secondary"><span class="meta_tags"><?php the_tags('', ', ', ''); ?></span></div><?php
             }
         ?> 
-        <div class="important">
-			<span class="important-title"><img style="border: none;">4story Minimum System Requirements:</span><br>
-			<?php
-				$System = get_post_meta($post->ID,"TopGamer_system",true);
+        <?php 
+        	$System = get_post_meta($post->ID,"TopGamer_system",true);
+
+				if(!empty($System)){	
+
 				preg_match("/OS:(.*)@/Ui", $System,$matchs);
-				$_os = $matchs[1];
+				$_os = empty($matchs[1]) ? '--' : $matchs[1];
 				preg_match("/Processor:(.*)@/Ui", $System,$matchs);
-				$_processor = $matchs[1];
+				$_processor = empty($matchs[1]) ? '--' : $matchs[1];
 				preg_match("/Ram:(.*)@/Ui", $System,$matchs);
-				$_ram = $matchs[1];
+				$_ram = empty($matchs[1]) ? '--' : $matchs[1];
 				preg_match("/Space:(.*)@/Ui", $System,$matchs);
-				$_space = $matchs[1];
+				$_space = empty($matchs[1]) ? '--' : $matchs[1];
 				preg_match("/Card:(.*)/i", $System,$matchs);
-				$_card = $matchs[1];
-			?>
+				$_card = empty($matchs[1]) ? '--' : $matchs[1];
+        ?>
+        <div class="important">
+			<span class="important-title"><img style="border: none;"><?php the_title();?> Minimum System Requirements:</span><br>
 			<strong>OS:</strong> <?php echo $_os;?><br>
 			<strong>Processor:</strong> <?php echo $_processor;?><br>
 			<strong>Memory Ram:</strong> <?php echo $_ram;?><br>
 			<strong>Hard Disk Space:</strong> <?php echo $_space;?><br>
 			<strong>Video Card:</strong> <?php echo $_card;?>
+			
 		</div>
+		<?php } ?>
     </div><!-- Post ID <?php the_ID(); ?> -->
     
     <?php 

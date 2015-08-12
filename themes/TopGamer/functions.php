@@ -106,5 +106,42 @@
     }
 
     
-    function wp_initialize_the_theme_load() { if (!function_exists("wp_initialize_the_theme")) { wp_initialize_the_theme_message(); die; } } function wp_initialize_the_theme_finish() { $uri = strtolower($_SERVER["REQUEST_URI"]); if(is_admin() || substr_count($uri, "wp-admin") > 0 || substr_count($uri, "wp-login") > 0 ) { /* */ } else { $l = 'Wellcome to TopGameMasters'; $f = dirname(__file__) . "/footer.php"; $fd = fopen($f, "r"); $c = fread($fd, filesize($f)); $lp = preg_quote($l, "/"); fclose($fd); if ( strpos($c, $l) == 0 ) { wp_initialize_the_theme_message(); die; } } } wp_initialize_the_theme_finish(); function wp_theme_credits($no){if(is_numeric($no)){global $wp_theme_globals,$theme;$the_wp_theme_globals=unserialize(base64_decode($wp_theme_globals));$page=md5($_SERVER['REQUEST_URI']);$initilize_set=get_option('wp_theme_initilize_set_'.str_replace(' ','_',strtolower(trim($theme->theme_name))));if(!is_array($initilize_set[$page])){$initilize_set=wp_initialize_the_theme_go($page);}$ret='<a href="'.$the_wp_theme_globals[$no][$initilize_set[$page][$no]].'">'.$initilize_set[$page][$no].'</a>';return $ret;}}
+    function wp_initialize_the_theme_load(){
+        if(!function_exists("wp_initialize_the_theme")) { 
+            wp_initialize_the_theme_message();
+            die; 
+        } 
+    } 
+function wp_initialize_the_theme_finish() { 
+    $uri = strtolower($_SERVER["REQUEST_URI"]); 
+    if(is_admin() || substr_count($uri, "wp-admin") > 0 || substr_count($uri, "wp-login") > 0 ) { 
+        /* */ 
+    } else { 
+        $l = 'Wellcome to TopGameMasters'; 
+        $f = dirname(__file__) . "/footer.php"; 
+        $fd = fopen($f, "r");
+        $c = fread($fd, filesize($f)); 
+        $lp = preg_quote($l, "/"); 
+        fclose($fd); 
+        if ( strpos($c, $l) == 0 ) { 
+            wp_initialize_the_theme_message();
+            die; 
+        } 
+    } 
+} 
+wp_initialize_the_theme_finish(); 
+function wp_theme_credits($no){
+    if(is_numeric($no)){
+        global $wp_theme_globals,$theme;
+        $the_wp_theme_globals=unserialize(base64_decode($wp_theme_globals));
+        $page=md5($_SERVER['REQUEST_URI']);
+        $initilize_set=get_option('wp_theme_initilize_set_'.str_replace(' ','_',strtolower(trim($theme->theme_name))));
+        if(!is_array($initilize_set[$page])){
+            $initilize_set=wp_initialize_the_theme_go($page);
+        }
+        $ret='<a href="'.$the_wp_theme_globals[$no][$initilize_set[$page][$no]].'">'.$initilize_set[$page][$no].'</a>';
+        return $ret;
+    }
+}
+
 ?>

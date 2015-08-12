@@ -4,16 +4,6 @@
     
         <h2 class="title"><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'themater' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
         
-        <div class="postmeta-primary">
-
-            <span class="meta_date"><?php echo get_the_date(); ?></span>
-            
-            <?php if(comments_open( get_the_ID() ))  {
-                    ?> &nbsp; <span class="meta_comments"><?php comments_popup_link( __( 'No comments', 'themater' ), __( '1 Comment', 'themater' ), __( '% Comments', 'themater' ) ); ?></span><?php
-                }
-            ?> 
-        </div>
-        
         <div class="entry clearfix">
             
             <?php

@@ -105,16 +105,7 @@ class ThematerTabs extends WP_Widget
                                 <?php if ($theme->options['general']['featured_image'] &&  $this->posts_defaults['display_featured_image'] && has_post_thumbnail() ) { ?><a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(array($this->posts_defaults['featured_image_width'],$this->posts_defaults['featured_image_height']), array("class" => "posts-widget-featured-image " . $this->posts_defaults['featured_image_align'])); ?></a> <?php } ?>
                                 <?php if ( $this->posts_defaults['display_title'] ) { ?> <h3 class="posts-widgettitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3><?php } ?>
                                 <?php
-                                    if($this->posts_defaults['display_date'] || $this->posts_defaults['display_author']) {
-                                        ?><div class="posts-widget-meta"><?php 
-                                            if($this->posts_defaults['display_date'] ) {
-                                                the_time($theme->get_option('dateformat'));
-                                            }
-                                            if($this->posts_defaults['display_author']) {
-                                               echo ' '; _e('By', 'themater'); echo ' '; the_author();
-                                            } ?>
-                                        </div><?php 
-                                    }
+                                    
                                     if($this->posts_defaults['display_content'] || $this->posts_defaults['display_read_more']) {
                                         ?><div class="posts-widget-entry"><?php 
                                             if($this->posts_defaults['content_type'] == 'the_content') {
