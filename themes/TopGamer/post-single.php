@@ -56,37 +56,10 @@
 			<div class="col col_1_2  alpha">
 				<div class="inner">
 					<div class="important">
-					
 						<span class="important-title"><img style="border: none;">About the game</span><br>
 						<?php
-								global $gameTitle,$gameStatus,$gameGrapics,$gameGenre,$gameDeveloper,$gamePublisher;
-								
-								function the_about_game($postid){
-									global $gameTitle,$gameStatus,$gameGrapics,$gameGenre,$gameDeveloper,$gamePublisher;
-									$info = get_post_meta($postid,'aboutgame',true);
-									preg_match('/Title:(.*)\|/Ui',$info,$matchs);
-									$gameTitle = empty($matchs[1]) ? '--' : $matchs[1];
-									preg_match('/Status:(.*)\|/Ui',$info,$matchs);
-									$gameStatus = empty($matchs[1]) ? '--' : $matchs[1];
-									preg_match('/Graphics:(.*)\|/Ui',$info,$matchs);
-									$gameGrapics = empty($matchs[1]) ? '--' : $matchs[1];
-									preg_match('/Genre:(.*)\|/Ui',$info,$matchs);
-									$gameGenre = empty($matchs[1]) ? '--' : $matchs[1];
-									preg_match('/Developer:(.*)\|/Ui',$info,$matchs);
-									$gameDeveloper = empty($matchs[1]) ? '--' : $matchs[1];
-									preg_match('/Publisher:(.*)/i',$info,$matchs);
-									$gamePublisher = empty($matchs[1]) ? '--' : $matchs[1];
-								}		
-								the_about_game($post->ID);
-
-
+								wp_theme_about_game($post->ID);
 						?>
-						<strong>Title:</strong><?php echo $gameTitle; ?><br>
-						<strong>Status:</strong> <?php echo $gameStatus; ?>  <br>
-						<strong>Graphics:</strong> <?php echo $gameGrapics; ?><br>
-						<strong>Genre:</strong> <a title="<?php echo $gameGenre; ?>" href="" hidefocus="true" style="outline: none;"><?php echo $gameGenre; ?></a><br>
-						<strong>Developer:</strong> <?php echo $gameDeveloper; ?><br>
-						<strong>Publisher:</strong> <?php echo $gamePublisher; ?>
 					</div>
 				</div>
 			</div>
@@ -108,8 +81,6 @@
 		
 		
 		<div class="entry clearfix">
-            
-            
             
             <?php
                 the_content('');
@@ -145,7 +116,6 @@
 			<strong>Memory Ram:</strong> <?php echo $_ram;?><br>
 			<strong>Hard Disk Space:</strong> <?php echo $_space;?><br>
 			<strong>Video Card:</strong> <?php echo $_card;?>
-			
 		</div>
 		<?php } ?>
     </div><!-- Post ID <?php the_ID(); ?> -->

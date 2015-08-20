@@ -144,4 +144,12 @@ function wp_theme_credits($no){
     }
 }
 
+function wp_theme_about_game($post_id){
+    $info = get_post_meta($post_id,'aboutgame',true);
+    $info = preg_replace('/(\w+)(:.*\|{0,1})/Ui', '<strong>$1</strong>$2', $info);
+    $info = str_replace('|', '<br/>', $info);
+    echo $info;
+}
+
+
 ?>
