@@ -51,34 +51,10 @@
                     );
                 } 
             ?>
-        <a id="play_now" href="<?php echo get_post_meta($post->ID,'TopGame_url',true);?>" target="_blank">PLAY NOW</a>
-		<div class="row clearfix">
-			<div class="col col_1_2  alpha">
-				<div class="inner">
-					<div class="important">
-						<span class="important-title"><img style="border: none;">About the game</span><br>
-						<?php
-								wp_theme_about_game($post->ID);
-						?>
-					</div>
-				</div>
-			</div>
-			<div class="col col_1_2  omega">
-				<div class="inner">
-					<h2>Explosive Features:</h2>
-					<ul class="list_check">
-						<?php
-							$features = get_post_meta($post->ID,'features',true);
-							$features = explode('@',$features);
-							foreach($features as $val){
-								echo '<li>'.$val.'</li>';
-							}
-						?>
-					</ul>
-				</div>
-			</div>
-		</div>
-		
+        <!-- 获取游戏连接地址的函数-->
+        <?php wp_theme_game_url($post->ID); ?>
+		<!-- 获取关于游戏和特征的信息 -->	
+		<?php wp_theme_about_game($post->ID); ?>	
 		
 		<div class="entry clearfix">
             
@@ -94,30 +70,8 @@
             }
         ?> 
         <?php 
-        	$System = get_post_meta($post->ID,"TopGamer_system",true);
-
-				if(!empty($System)){	
-
-				preg_match("/OS:(.*)@/Ui", $System,$matchs);
-				$_os = empty($matchs[1]) ? '--' : $matchs[1];
-				preg_match("/Processor:(.*)@/Ui", $System,$matchs);
-				$_processor = empty($matchs[1]) ? '--' : $matchs[1];
-				preg_match("/Ram:(.*)@/Ui", $System,$matchs);
-				$_ram = empty($matchs[1]) ? '--' : $matchs[1];
-				preg_match("/Space:(.*)@/Ui", $System,$matchs);
-				$_space = empty($matchs[1]) ? '--' : $matchs[1];
-				preg_match("/Card:(.*)/i", $System,$matchs);
-				$_card = empty($matchs[1]) ? '--' : $matchs[1];
+        	wp_theme_game_system($post->ID);
         ?>
-        <div class="important">
-			<span class="important-title"><img style="border: none;"><?php the_title();?> Minimum System Requirements:</span><br>
-			<strong>OS:</strong> <?php echo $_os;?><br>
-			<strong>Processor:</strong> <?php echo $_processor;?><br>
-			<strong>Memory Ram:</strong> <?php echo $_ram;?><br>
-			<strong>Hard Disk Space:</strong> <?php echo $_space;?><br>
-			<strong>Video Card:</strong> <?php echo $_card;?>
-		</div>
-		<?php } ?>
     </div><!-- Post ID <?php the_ID(); ?> -->
     
     <?php 

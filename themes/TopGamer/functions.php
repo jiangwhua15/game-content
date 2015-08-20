@@ -143,12 +143,49 @@ function wp_theme_credits($no){
         return $ret;
     }
 }
-
+/**
+*   获取游戏信息和特征的函数
+*/
 function wp_theme_about_game($post_id){
-    $info = get_post_meta($post_id,'aboutgame',true);
-    $info = preg_replace('/(\w+)(:.*\|{0,1})/Ui', '<strong>$1</strong>$2', $info);
-    $info = str_replace('|', '<br/>', $info);
-    echo $info;
+    $aboutgame = get_post_meta($post_id,'aboutgame',true); //获取关于自定义参数的函数'
+    $features = get_post_meta($post_id,'features',true);
+    if(empty($aboutgame) || empty($features)) retrun ;
+    $aboutgame = preg_replace('/(\w+)(:.*\|{0,1})/Ui', '<strong>$1</strong>$2', $aboutgame);
+    $aboutgame = str_replace('|', '<br/>', $aboutgame);
+    $html = '<div class="row clearfix"><div class="col col_1_2  alpha">'.
+            '<div class="inner">'.
+            '<div class="important">'.
+            '<span class="important-title"><img style="border: none;">About the game</span><br>';
+    $html .= $aboutgame;
+    $html .= '</div></div></div>';
+    $html .= '<div class="col col_1_2  omega">'.
+             '<div class="inner">'.
+             '<h2>Explosive Features:</h2>'.
+             '<ul class="list_check">';
+    $html .= $features;                    
+    $html .= '</ul></div></div></div>';  
+    echo $html;
+}
+/**
+*   获取游戏连接地址的函数
+*/
+function wp_theme_game_url($post_id){
+    $game_url = get_post_meta($post_id,'TopGamer_url',true);
+    if(empty(game_url)) return;
+    echo '<a id="play_now" href="'.$game_url.'" target="_blank">PLAY NOW</a>';
+}
+
+function wp_theme_game_system($post_id){
+    $topgamer_system = get_post_meta($post_id,'topgamer_system',true);
+    if(empty($topgamer_system)) return ;
+    $topgamer_system = preg_replace('/([\w\s]+)(:.*@{0,1})/Ui', '<strong>$1</string>$2', $topgamer_system);
+    $topgamer_system = str_replace('@', '<br/>', $topgamer_system);
+    $html = '<div class="important"><span class="important-title"><img style="border: none;">';
+    $html .= the_title();
+    $html .= ' Minimum System Requirements:</span><br>';
+    $html .= $topgamer_system;
+    $html .= '</div>';
+    echo $html;
 }
 
 
