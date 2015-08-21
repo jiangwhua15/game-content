@@ -150,7 +150,7 @@ function wp_theme_about_game($post_id){
     $aboutgame = get_post_meta($post_id,'aboutgame',true); //获取关于自定义参数的函数'
     $features = get_post_meta($post_id,'features',true);
     if(empty($aboutgame) || empty($features)) retrun ;
-    $aboutgame = preg_replace('/(\w+)(:.*\|{0,1})/Ui', '<strong>$1</strong>$2', $aboutgame);
+    $aboutgame = preg_replace('/(\w+)(:[^\|])/i', '<strong>$1</strong>$2', $aboutgame);
     $aboutgame = str_replace('|', '<br/>', $aboutgame);
     $html = '<div class="row clearfix"><div class="col col_1_2  alpha">'.
             '<div class="inner">'.
@@ -171,17 +171,18 @@ function wp_theme_about_game($post_id){
 */
 function wp_theme_game_url($post_id){
     $game_url = get_post_meta($post_id,'TopGamer_url',true);
-    if(empty(game_url)) return;
+    if(empty($game_url)) return ;
     echo '<a id="play_now" href="'.$game_url.'" target="_blank">PLAY NOW</a>';
 }
-
+/**
+*   获取游戏系统信息
+*/
 function wp_theme_game_system($post_id){
-    $topgamer_system = get_post_meta($post_id,'topgamer_system',true);
+    $topgamer_system = get_post_meta($post_id,'TopGamer_system',true);
     if(empty($topgamer_system)) return ;
-    $topgamer_system = preg_replace('/([\w\s]+)(:.*@{0,1})/Ui', '<strong>$1</string>$2', $topgamer_system);
+    $topgamer_system = preg_replace('/([a-z\s]+)(:[^@])/i', '<strong>$1</strong>$2', $topgamer_system);
     $topgamer_system = str_replace('@', '<br/>', $topgamer_system);
     $html = '<div class="important"><span class="important-title"><img style="border: none;">';
-    $html .= the_title();
     $html .= ' Minimum System Requirements:</span><br>';
     $html .= $topgamer_system;
     $html .= '</div>';
